@@ -1,0 +1,226 @@
+/* ===================================================
+   About (¿Quiénes somos?) Styling — Yellow/Red Theme
+   =================================================== */
+
+.aboutSection {
+  padding: var(--space-2xl) 0;
+  background-color: var(--background);
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  composes: container from global;
+}
+
+.splitGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+/* --- Left Column: Text Content --- */
+.textContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sectionLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--yellow);
+  background: rgba(245, 196, 0, 0.08);
+  border: 1px solid var(--border);
+  margin-bottom: var(--space-sm);
+}
+
+.labelDot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-circle);
+  background: var(--yellow);
+  box-shadow: 0 0 6px var(--yellow);
+}
+
+.title {
+  font-size: clamp(1.8rem, 3.5vw, 2.2rem);
+  font-weight: 800;
+  margin-bottom: var(--space-md);
+}
+
+.titleAccent {
+  color: var(--yellow);
+}
+
+.paragraph {
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+
+/* Image styling under text */
+.imageInner {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-top: var(--space-sm);
+}
+
+.aboutImage {
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(5, 5, 5, 0.9) 100%);
+}
+
+/* --- Right Column: Visual Card --- */
+.visualCol {
+  display: flex;
+  justify-content: center;
+}
+
+.phraseCard {
+  width: 100%;
+  max-width: 380px;
+  padding: var(--space-lg) var(--space-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.phraseCard:hover {
+  border-color: var(--yellow);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(245, 196, 0, 0.08);
+}
+
+.shieldIconWrapper {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-circle);
+  background: rgba(245, 196, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-md);
+  border: 1px solid var(--border);
+}
+
+.shieldIcon {
+  width: 36px;
+  height: 36px;
+}
+
+.phraseTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.phraseText {
+  color: var(--yellow-soft);
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Decorative grid lines inside card */
+.cardLines {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(245, 196, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 196, 0, 0.02) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- Stats Row --- */
+.statsRow {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+  padding: var(--space-md) var(--space-sm);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 150px;
+}
+
+.statNumber {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 800;
+  color: var(--yellow);
+  line-height: 1;
+  font-family: var(--font-mono);
+}
+
+.statSuffix {
+  color: var(--red);
+}
+
+.statLabel {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+}
+
+/* ===================================================
+   Responsive Layout
+   =================================================== */
+@media (max-width: 768px) {
+  .splitGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .textContent {
+    align-items: center;
+    text-align: center;
+  }
+
+  .statsRow {
+    gap: var(--space-sm);
+  }
+
+  .statItem {
+    min-width: 100px;
+    flex: 1 1 30%;
+  }
+}

@@ -1,0 +1,81 @@
+/* ===================================================
+   Benefits Card grid (Hover lifts 4px and turns yellow)
+   =================================================== */
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.benefitCard {
+  composes: glass-card from global;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-md);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Hover: Lifts 4px and turns border to yellow */
+.benefitCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--yellow);
+  box-shadow: 0 10px 30px rgba(245, 196, 0, 0.08);
+}
+
+.iconCircle {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-circle);
+  background: rgba(245, 196, 0, 0.08);
+  border: 1px solid var(--border);
+  color: var(--yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-md);
+  transition: all var(--transition-base);
+}
+
+.iconCircle svg {
+  width: 26px;
+  height: 26px;
+}
+
+.benefitCard:hover .iconCircle {
+  background: var(--gradient-primary);
+  color: #000;
+  border-color: transparent;
+  transform: scale(1.05);
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.cardDescription {
+  font-size: 0.925rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ===================================================
+   Responsive Mobile
+   =================================================== */
+@media (max-width: 768px) {
+  .benefitsGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+}

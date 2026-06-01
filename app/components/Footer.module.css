@@ -1,0 +1,141 @@
+/* ===================================================
+   Footer — Solid Black with Yellow/Red Theme
+   =================================================== */
+
+.footer {
+  background-color: #000000;
+  border-top: 1.5px solid var(--border);
+  padding: var(--space-xl) 0 var(--space-md);
+  position: relative;
+  z-index: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--white);
+}
+
+.logoIcon {
+  color: var(--yellow);
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 0 4px rgba(245, 196, 0, 0.3));
+}
+
+.brandDesc {
+  max-width: 320px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.linkList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.linkItem a {
+  color: var(--muted);
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+}
+
+.linkItem a:hover {
+  color: var(--yellow);
+  padding-left: 2px;
+}
+
+.socials {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.socialIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-circle);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.socialIcon:hover {
+  background: var(--yellow);
+  color: #000;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(245, 196, 0, 0.35);
+}
+
+.bottom {
+  border-top: 1px solid var(--surface-soft);
+  padding-top: var(--space-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.copy {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ===================================================
+   Responsive Mobile
+   =================================================== */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .brandDesc {
+    max-width: 100%;
+  }
+
+  .bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}

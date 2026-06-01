@@ -1,0 +1,272 @@
+/* ===================================================
+   Hero Section — Yellow/Red Circuits theme
+   =================================================== */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 0 4rem;
+  z-index: 1;
+}
+
+/* Semi-transparent dark overlay to keep texts highly readable */
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(245, 196, 0, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* --- Layout Grid --- */
+.layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+/* --- Left Column: Text --- */
+.textCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--yellow);
+  background: rgba(245, 196, 0, 0.1);
+  border: 1px solid var(--border);
+  margin-bottom: var(--space-md);
+  animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-circle);
+  background: var(--yellow);
+  box-shadow: 0 0 8px var(--yellow);
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.title {
+  margin-bottom: var(--space-md);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+.yellowText {
+  color: var(--yellow);
+  position: relative;
+  display: inline-block;
+}
+
+.yellowText::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--gradient-primary);
+  border-radius: 1px;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--white);
+  margin-bottom: var(--space-sm);
+  max-width: 640px;
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards;
+}
+
+.support {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+  max-width: 580px;
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+}
+
+.whatsappIcon {
+  width: 18px;
+  height: 18px;
+}
+
+/* --- Right Column: Shield Graphic --- */
+.graphicCol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.shieldWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 100 / 110;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: floatShield 6s ease-in-out infinite;
+}
+
+.shieldLogo {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 20px rgba(245, 196, 0, 0.15));
+}
+
+/* Glow ring under the shield */
+.shieldGlow {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(circle, rgba(245, 196, 0, 0.2) 0%, transparent 60%);
+  filter: blur(20px);
+  z-index: -1;
+  pointer-events: none;
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* --- Scroll Indicator --- */
+.scrollIndicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.scrollMouse {
+  width: 24px;
+  height: 40px;
+  border: 2px solid var(--muted);
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+.scrollDot {
+  width: 4px;
+  height: 8px;
+  background-color: var(--yellow);
+  border-radius: 2px;
+  animation: scrollWheel 2s infinite cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scrollLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ===================================================
+   Animations Keyframes
+   =================================================== */
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes scrollWheel {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(12px); opacity: 0.3; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes floatShield {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===================================================
+   Responsive Mobile Adjustment
+   =================================================== */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    text-align: center;
+  }
+
+  .textCol {
+    align-items: center;
+    text-align: center;
+  }
+
+  .title::after {
+    left: 10%;
+    width: 80%;
+  }
+
+  .subtitle, .support {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ctas {
+    justify-content: center;
+  }
+
+  .graphicCol {
+    order: -1; /* Place shield graphic above text on mobile */
+    margin-bottom: var(--space-sm);
+  }
+
+  .shieldWrapper {
+    max-width: 200px;
+  }
+}

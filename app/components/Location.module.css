@@ -1,0 +1,183 @@
+/* ===================================================
+   Location — Visual Map Layout with Yellow/Red Theme
+   =================================================== */
+
+.locationSection {
+  padding: var(--space-2xl) 0;
+  background-color: var(--background);
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  composes: container from global;
+}
+
+.sectionLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--yellow);
+  background: rgba(245, 196, 0, 0.08);
+  border: 1px solid var(--border);
+  margin-bottom: var(--space-md);
+}
+
+.labelDot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-circle);
+  background: var(--yellow);
+  box-shadow: 0 0 6px var(--yellow);
+}
+
+.splitGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+/* --- Info Column --- */
+.infoContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title {
+  font-size: clamp(1.8rem, 3.5vw, 2.2rem);
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: var(--space-md);
+}
+
+.titleAccent {
+  color: var(--yellow);
+}
+
+.paragraph {
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+
+/* Address Box Card */
+.addressCard {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  width: 100%;
+}
+
+.pinIcon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.addressLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.15rem;
+}
+
+.addressText {
+  font-size: 0.925rem;
+  color: var(--white);
+  line-height: 1.4;
+}
+
+/* --- Map Wrapper --- */
+.mapWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.mapGlassCard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.mapGlassCard:hover {
+  border-color: var(--yellow);
+  box-shadow: 0 12px 40px rgba(245, 196, 0, 0.08);
+}
+
+.mapFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  filter: grayscale(0.9) invert(0.9) contrast(1.2); /* Stylized dark map matching our cybersecurity theme */
+  opacity: 0.85;
+  transition: filter var(--transition-base), opacity var(--transition-base);
+}
+
+.mapGlassCard:hover .mapFrame {
+  filter: grayscale(0.3) invert(0) contrast(1); /* Color pops back on hover */
+  opacity: 1;
+}
+
+/* Map Badge overlay */
+.mapBadge {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(16, 16, 16, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--yellow);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.badgeIcon {
+  font-size: 0.85rem;
+}
+
+/* ===================================================
+   Responsive Mobile Adjustment
+   =================================================== */
+@media (max-width: 768px) {
+  .splitGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .infoContent {
+    align-items: center;
+    text-align: center;
+  }
+
+  .addressCard {
+    text-align: left;
+  }
+}

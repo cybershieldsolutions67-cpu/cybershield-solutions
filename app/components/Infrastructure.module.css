@@ -1,0 +1,235 @@
+/* ===================================================
+   Infrastructure (Network Topology Diagram) Styling
+   =================================================== */
+
+.infraSection {
+  padding: var(--space-2xl) 0;
+  background-color: var(--background);
+  position: relative;
+  overflow: hidden;
+}
+
+.topologyContainer {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: 0 10px 45px rgba(0, 0, 0, 0.6);
+  position: relative;
+  z-index: 1;
+}
+
+.diagramTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--yellow);
+  margin-bottom: var(--space-xl);
+}
+
+.diagramWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* --- Row 1: Backbone (Horizontal Flow) --- */
+.backboneRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+/* Individual node card styles */
+.node {
+  background: var(--surface-soft);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 130px;
+  max-width: 160px;
+  text-align: center;
+  transition: all var(--transition-base);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.yellowBorder {
+  border-color: var(--border);
+}
+
+.node:hover {
+  border-color: var(--yellow);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(245, 196, 0, 0.15);
+}
+
+.activeNode {
+  border-color: var(--yellow-soft);
+  box-shadow: 0 0 15px rgba(245, 196, 0, 0.08);
+}
+
+.nodeIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-circle);
+  background: rgba(245, 196, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--yellow);
+  border: 1px solid var(--border);
+}
+
+.nodeIcon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.nodeLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+/* Connecting Line (Horizontal) */
+.connectionLine {
+  height: 2px;
+  width: 50px;
+  background: linear-gradient(90deg, var(--yellow) 0%, var(--red) 100%);
+  position: relative;
+}
+
+/* Animation on connection lines */
+.connectionLine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 100%;
+  background: var(--white);
+  box-shadow: 0 0 8px var(--white);
+  animation: linePulse 2.5s linear infinite;
+}
+
+@keyframes linePulse {
+  0% { left: 0%; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+/* --- Vertical Bridge (Switch to Endpoints) --- */
+.verticalBridge {
+  width: 2px;
+  height: 40px;
+  background: var(--red);
+  position: relative;
+}
+
+/* --- Row 2: Endpoints Flow --- */
+.endpointsRow {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 0;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.endpointWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Branch vertical connector line */
+.branchLine {
+  width: 2px;
+  height: 30px;
+  background: var(--yellow);
+}
+
+.footnotes {
+  text-align: center;
+  margin-top: var(--space-lg);
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ===================================================
+   Responsive (Vertical Stack layout)
+   =================================================== */
+@media (max-width: 768px) {
+  .backboneRow {
+    flex-direction: column;
+  }
+
+  .connectionLine {
+    height: 35px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--yellow) 0%, var(--red) 100%);
+  }
+
+  .connectionLine::after {
+    width: 100%;
+    height: 8px;
+    animation: linePulseVert 2.5s linear infinite;
+  }
+
+  @keyframes linePulseVert {
+    0% { top: 0%; opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  .verticalBridge {
+    display: none;
+  }
+
+  .endpointsRow {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+  }
+
+  .endpointWrapper {
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    gap: var(--space-xs);
+  }
+
+  .branchLine {
+    width: 35px;
+    height: 2px;
+    flex-shrink: 0;
+  }
+
+  .node {
+    width: 100%;
+    max-width: 240px;
+    flex-direction: row;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    gap: 0.75rem;
+  }
+
+  .nodeIcon {
+    width: 38px;
+    height: 38px;
+  }
+}

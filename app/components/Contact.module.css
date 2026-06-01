@@ -1,0 +1,296 @@
+/* ===================================================
+   Contact Section — Yellow/Red Theme
+   =================================================== */
+
+.contactSection {
+  padding: var(--space-2xl) 0;
+  position: relative;
+  background-color: var(--background);
+  overflow: hidden;
+}
+
+.container {
+  composes: container from global;
+}
+
+.sectionLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--yellow);
+  background: rgba(245, 196, 0, 0.08);
+  border: 1px solid var(--border);
+  margin-bottom: var(--space-md);
+}
+
+.labelDot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-circle);
+  background: var(--yellow);
+  box-shadow: 0 0 6px var(--yellow);
+}
+
+/* --- Header --- */
+.sectionHeader {
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(1.8rem, 3.5vw, 2.2rem);
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: var(--space-xs);
+}
+
+.titleAccent {
+  color: var(--yellow);
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* --- Split Grid Layout --- */
+.splitGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+/* ===================================================
+   FORM CARD (Left)
+   =================================================== */
+.formCard {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.formCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+}
+
+.formTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.formTitleIcon {
+  font-size: 1.15rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fieldLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.925rem;
+  color: var(--white);
+  background: var(--surface-soft);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: all var(--transition-base);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 3px rgba(245, 196, 0, 0.1);
+  background: var(--surface);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.submitBtn {
+  composes: btn btn-primary from global;
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 0.95rem;
+}
+
+/* ===================================================
+   INFO SIDE (Right)
+   =================================================== */
+.infoContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contactCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.contactCard:hover {
+  border-color: var(--yellow);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(245, 196, 0, 0.05);
+}
+
+.cardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: rgba(245, 196, 0, 0.08);
+  border: 1px solid var(--border);
+  color: var(--yellow);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.cardLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.15rem;
+}
+
+.cardValue {
+  color: var(--white);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.cardLink {
+  color: var(--yellow);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.cardLink:hover {
+  color: var(--yellow-soft);
+}
+
+/* --- WhatsApp Button (with subtle pulse animation) --- */
+.whatsappBtn {
+  composes: btn btn-whatsapp from global;
+  width: 100%;
+  font-size: 0.95rem;
+  padding: 0.8rem;
+  position: relative;
+  animation: subtlePulse 3s ease-in-out infinite;
+}
+
+.whatsappIcon {
+  font-size: 1.2rem;
+}
+
+@keyframes subtlePulse {
+  0% {
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.2);
+  }
+  50% {
+    box-shadow: 0 4px 22px rgba(37, 211, 102, 0.45);
+    transform: scale(1.01);
+  }
+  100% {
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.2);
+  }
+}
+
+/* --- Closing Card --- */
+.closingCard {
+  padding: var(--space-md);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.closingText {
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+.closingBrand {
+  color: var(--yellow);
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ===================================================
+   Responsive Mobile
+   =================================================== */
+@media (max-width: 900px) {
+  .splitGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .formCard, .infoContent {
+    max-width: 580px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
