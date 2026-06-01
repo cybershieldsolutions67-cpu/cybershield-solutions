@@ -128,7 +128,7 @@ export default function About() {
             {/* School Team/Workplace illustration below the text */}
             <div className={styles.imageInner}>
               <Image
-                src="/images/about-team.jpg"
+                src="/images/equipo-trabajando.png"
                 alt="Equipo de CyberShield Solutions trabajando en laptops"
                 fill
                 sizes="(max-width: 768px) 100vw, 450px"

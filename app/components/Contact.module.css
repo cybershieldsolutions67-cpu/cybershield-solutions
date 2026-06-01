@@ -279,6 +279,18 @@
   font-style: normal;
 }
 
+/* --- Status feedback box --- */
+.statusBox {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
 /* ===================================================
    Responsive Mobile
    =================================================== */

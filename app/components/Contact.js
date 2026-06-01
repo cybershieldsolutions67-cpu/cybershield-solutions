@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './Contact.module.css';
 
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 export default function Contact() {
   const sectionRef = useRef(null);
   const [formData, setFormData] = useState({
@@ -10,7 +12,10 @@ export default function Contact() {
     email: '',
     message: '',
   });
-  const [submitted, setSubmitted] = useState(false);
+
+  const [submitting, setSubmitting] = useState(false);
+  const [statusMsg, setStatusMsg] = useState('');
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -39,12 +44,79 @@ export default function Contact() {
     }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    // Frontend only — no backend
-    setSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
-    setTimeout(() => setSubmitted(false), 4000);
+    setSubmitting(true);
+    setStatusMsg('');
+    setIsError(false);
+
+    const { name, email, message } = formData;
+
+    // 1. Client-Side Validations
+    if (!name || name.trim().length === 0) {
+      setIsError(true);
+      setStatusMsg('El nombre es obligatorio.');
+      setSubmitting(false);
+      return;
+    }
+    if (name.length > 100) {
+      setIsError(true);
+      setStatusMsg('El nombre no debe exceder los 100 caracteres.');
+      setSubmitting(false);
+      return;
+    }
+
+    if (!email || !EMAIL_REGEX.test(email)) {
+      setIsError(true);
+      setStatusMsg('Formato de correo electrónico inválido.');
+      setSubmitting(false);
+      return;
+    }
+
+    if (!message || message.trim().length === 0) {
+      setIsError(true);
+      setStatusMsg('El mensaje es obligatorio.');
+      setSubmitting(false);
+      return;
+    }
+    if (message.length > 1000) {
+      setIsError(true);
+      setStatusMsg('El mensaje no debe exceder los 1000 caracteres.');
+      setSubmitting(false);
+      return;
+    }
+
+    try {
+      // 2. Dispatch real API request
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          message: message.trim(),
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        setIsError(true);
+        setStatusMsg(result.error || 'Ocurrió un error inesperado al enviar.');
+      } else {
+        setIsError(false);
+        setStatusMsg('✓ Mensaje enviado de forma segura con éxito.');
+        setFormData({ name: '', email: '', message: '' });
+      }
+    } catch (err) {
+      setIsError(true);
+      setStatusMsg('Error de red. Por favor compruebe su conexión e intente de nuevo.');
+      console.error('[Network Error]', err);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -62,9 +134,7 @@ export default function Contact() {
             <span className={styles.titleAccent}>Contáctanos</span>
           </h2>
           <p className={styles.subtitle}>
-            Si necesitas soporte técnico, instalación de red, una página web o
-            asesoría básica en seguridad digital, puedes comunicarte con
-            nosotros.
+            Si necesitas soporte técnico, instalación de red, una página web o asesoría básica en seguridad digital, puedes comunicarte con nosotros de forma segura.
           </p>
         </div>
 
@@ -76,7 +146,7 @@ export default function Contact() {
               Envíanos un mensaje
             </h3>
 
-            <form className={styles.form} onSubmit={handleSubmit}>
+            <form className={styles.form} onSubmit={handleSubmit} noValidate>
               <div className={styles.fieldGroup}>
                 <label className={styles.fieldLabel} htmlFor="contact-name">
                   Nombre
@@ -89,6 +159,8 @@ export default function Contact() {
                   placeholder="Tu nombre completo"
                   value={formData.name}
                   onChange={handleChange}
+                  maxLength={100}
+                  disabled={submitting}
                   required
                 />
               </div>
@@ -105,6 +177,7 @@ export default function Contact() {
                   placeholder="tu@correo.com"
                   value={formData.email}
                   onChange={handleChange}
+                  disabled={submitting}
                   required
                 />
               </div>
@@ -120,12 +193,28 @@ export default function Contact() {
                   placeholder="¿En qué podemos ayudarte?"
                   value={formData.message}
                   onChange={handleChange}
+                  maxLength={1000}
+                  disabled={submitting}
                   required
                 />
               </div>
 
-              <button type="submit" className={styles.submitBtn}>
-                {submitted ? '✓ Mensaje enviado' : 'Enviar mensaje'}
+              {/* Status Message feedback panel */}
+              {statusMsg && (
+                <div 
+                  className={styles.statusBox} 
+                  style={{ color: isError ? 'var(--red)' : 'var(--yellow)', borderColor: isError ? 'var(--border-red)' : 'var(--border)' }}
+                >
+                  {statusMsg}
+                </div>
+              )}
+
+              <button 
+                type="submit" 
+                className={styles.submitBtn} 
+                disabled={submitting}
+              >
+                {submitting ? 'Enviando de forma segura...' : 'Enviar mensaje'}
               </button>
             </form>
           </div>
